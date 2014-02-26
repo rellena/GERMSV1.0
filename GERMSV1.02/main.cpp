@@ -22,7 +22,39 @@ void setScale()
 
 	scale = factor;
 }
+//sets arrow keys
+void keypressed(int key, int x, int y)
+{
+    switch (key){
+        case GLUT_KEY_RIGHT:
+            move = true;
+			mainPlayer.move((mainPlayer.getPosition().x)+mainPlayer.getSpeed(), mainPlayer.getPosition().y);
+			move = false;
+            break;
 
+        case GLUT_KEY_LEFT:
+            move = true;
+			mainPlayer.move((mainPlayer.getPosition().x)-mainPlayer.getSpeed(), mainPlayer.getPosition().y);
+			move = false;
+        break;
+
+        case GLUT_KEY_UP:
+            move = true;
+			mainPlayer.move((mainPlayer.getPosition().x), mainPlayer.getPosition().y-mainPlayer.getSpeed());
+			move = false;
+            break;
+
+        case GLUT_KEY_DOWN:
+            move = true;
+			mainPlayer.move((mainPlayer.getPosition().x), mainPlayer.getPosition().y+mainPlayer.getSpeed());
+			move = false;
+        break;
+
+        default:
+         break;
+    }
+    glutPostRedisplay();
+}
 void playerMovement (player &mainPlayer)
 {
 	//rotate player
@@ -104,9 +136,10 @@ void display(void)
 
 	if (move == true)
 		count++;
+	
 	glPushAttrib(GL_CURRENT_BIT);//keeps players color from changing
 	drawPlayer();
-	glColor3f(0.0, 1.0, 0.0); 
+	glColor3f(1.0, 0.0, 0.0); 
 	drawRect(150,55);
 	drawRect(250, 357);
 	drawRect(369,109);
