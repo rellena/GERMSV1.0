@@ -14,20 +14,14 @@
 //player constructors
 player::player()
 :unit(), playerName(""), sprite(sprites())
-{
+{}
 
-}
-
-player::player(int h, int a,int d,int s,int r,int e, string cn, string cc, string pn, sprites sprt)
+player::player(float h, float a,float d,float s,float r,float e, string cn, string cc, string pn, sprites sprt)
 {
 	//see unit decl, for const details
 	unit(h,a,d,s,r,e,cn,cc);
 	playerName = pn;
 	sprite = sprt;
-}
-player::player(const player &other)
-{
-	copyPlayer(other);
 }
 player::~player()
 {
@@ -43,17 +37,6 @@ sprites player::getSprites()
 	return sprite;
 }
 //player operators
-player& player::operator =(const player &other)
-{
-	copyPlayer(other);
-	return *this;
-}
-//player private functions
-void player::copyPlayer(const player &other)
-{
-	playerName = other.playerName;
-	sprite = other.sprite;
-}
 
 void player::deletePlayer()
 {

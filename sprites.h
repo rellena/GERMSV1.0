@@ -6,7 +6,7 @@
 
 //author: Richard Ellena
 #pragma once
-#include "gameinclude.h"
+using namespace std;
 
 class sprites
 {

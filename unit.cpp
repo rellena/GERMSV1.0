@@ -9,7 +9,7 @@ unit::unit()
 :health(100),armor(50),damage(10),speed(5),range(5),energy(100), char_name(""), char_class("")
 {
 }
-unit::unit(int h, int a, int d, int s, int r, int e, string cn, string cc)
+unit::unit(float h, float a, float d, float s, float r, float e, string cn, string cc)
 {
 	health = h;
 	armor = a;
@@ -20,46 +20,55 @@ unit::unit(int h, int a, int d, int s, int r, int e, string cn, string cc)
 	char_name = cn;
 	char_class = cc;
 }
-int unit::getHealth()
+float unit::getHealth()
 {
 	return health;
 }
-void unit::setHealth(int h)
+void unit::setHealth(float h)
 {
 	health = h;
 }
-int unit::getArmor()
+float unit::getArmor()
 {
 	return armor;
 }
-void unit::setArmor(int a)
+void unit::setArmor(float a)
 {
 	armor = a;
 }
-int unit::getDamage()
+float unit::getDamage()
 {
 	return damage;
 }
-void unit::setDamage(int d)
+void unit::setDamage(float d)
 {
 	damage = d;
 }
-int unit::getSpeed()
+float unit::getSpeed()
 {
 	return speed;
 }
-void unit::setSpeed(int s)
+void unit::setSpeed(float s)
 {
 	speed = s;
 }
-int unit::getRange()
+float unit::getRange()
 {
 	return range;
 }
-void unit::setRange(int r)
+void unit::setRange(float r)
 {
 	 range = r;
 }
+float unit::getEnergy()
+{
+	return energy;
+}
+void unit::setEnergy(float e)
+{
+	energy = e;
+}
+
 string unit::getCharName()
 {
 	return char_name;
@@ -76,26 +85,74 @@ void unit::setCharClass(string cc)
 {
 	char_class = cc;
 }
-void unit::getPosition(int &rx, int &ry)
+Point unit::getPosition()
 {
-	rx = x;
-	ry = y;
+	return position;
 }
-void unit::setPosition(int newx, int newy)
+void unit::setPosition(float newx, float newy)
 {
-	x = newx;
-	y = newy;
+	position.x = newx;
+	position.y = newy;
 }
-void unit::move(int dirx, int diry)
+
+//Okay so this function is vital to the movement of units
+//Right now the movement is fairly choppy, if we add in physics that are more realistic
+//this will be the function to do it in
+Point unit::move(float dirx, float diry)
 {
-	//if the x to move is greater, then x must go up same for y
-	if (dirx > x)
-		x += speed;		
-	else
-		x -= speed;
+	//dirx, is the direction to move in, it is actually the
+	//point that the mouse click occured at, same for diry
+
+	//the ifs just check if the clicked occured above or below the sprite
+	//and then moves the sprite accordingly
+	float speedx, speedy;
+	float angle;
+
+	//cos = adj / hypo // adj = cos *hypo
+	angle = abs(diry - position.y);
+	angle = angle / (pow((float)(pow((dirx - position.x),2) + pow ((diry - position.y), 2)), (float)0.5));
+
+	speedx = speed * cos(angle);
+	speedy = speed * sin(angle);
+
+	if (dirx > position.x)
+	{
+		if (position.x + speedx <= dirx)
+			position.x += speedx;
+		else
+			position.x = dirx;
+	}
+	else if (dirx < position.x)
+	{
+		if (position.x - speedx >= dirx)
+			position.x -= speedx;
+		else
+			position.x = dirx;
+	}
 	
-	if (diry > y)
-		y += y + speed;
-	else
-		y -= y - speed;
+	if (diry > position.y)
+	{
+		if (position.y + speedy <= diry)
+			position.y += speedy;
+		else
+			position.y = diry;
+	}
+	else if (diry < position.y)
+	{
+		if (position.y - speedy >= diry)
+			position.y -= speedy;
+		else
+			position.y = diry;
+	}
+	return position;
+}	
+
+float unit::getRadius()
+{
+	return radius;
+}
+
+void unit::setRadius(float rad)
+{
+	radius = rad;
 }

@@ -3,15 +3,21 @@
 //file to the header or cpp that you are writing.
 
 //Author: Richard Ellena
-
 #include <freeglut.h>
 #include <iostream>
 #include <string>
 #include <math.h>
+#include <thread>
 #include "MouseListener.h"
 #include "player.h"
 #include "sprites.h"
 #include "unit.h"
 #include "Point.h"
+#include "wtypes.h"
+#include "keylistener.h"
+#include "GLfuncs.h"
+#include "playermovefuncs.h"
+#include "enemyhandler.h"
+#include "collisions.h"
 
 using namespace std;

@@ -2,18 +2,20 @@
 
 //Author: Richard Ellena
 #pragma once
-#include "gameinclude.h"
+using namespace std;
 
 class Point
 {
 public:
 	//operator=
 	Point& operator= (const Point&);
+	//operator ==
+	bool operator== (const Point&);
 	//constructors
 	Point();
-	Point(int, int);
+	Point(float, float);
 	Point(const Point&);//copy constructor
-	int x,y;
+	float x,y;
 private:
 	void copyPoint(const Point&);
 };

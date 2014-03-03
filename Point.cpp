@@ -6,7 +6,7 @@
 Point::Point()
 :x(0),y(0)
 {}
-Point::Point(int otherx, int othery)
+Point::Point(float otherx, float othery)
 {
 	x = otherx;
 	y = othery;
@@ -22,7 +22,13 @@ Point& Point::operator= (const Point &other)
 	copyPoint(other);
 	return *this;
 }
-
+bool Point::operator== (const Point& other)
+{
+	if (other.x == x && other.y == y)
+		return true;
+	else
+		return false;
+}
 //Private functions
 void Point::copyPoint(const Point &other)
 {
