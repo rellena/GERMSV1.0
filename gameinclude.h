@@ -8,14 +8,10 @@
 #include <iostream>
 #include <string>
 #include <math.h>
-#include <vector>
-#include <memory>
 #include "MouseListener.h"
 #include "player.h"
 #include "sprites.h"
 #include "unit.h"
 #include "Point.h"
-#include "wtypes.h"
-#include "keylistener.h"
 
 using namespace std;
