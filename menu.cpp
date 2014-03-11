@@ -5,7 +5,7 @@
 
 #include "gameinclude.h"
 
-extern Point mouseP;
+extern Point mouseP;	
 extern bool wasclicked_LB, ingame;
 extern int screenheight, screenwidth;
 
