@@ -4,6 +4,8 @@
 
 //Author: Richard Ellena
 #include <freeglut.h>
+#include <vector>
+#include <memory>
 #include <iostream>
 #include <string>
 #include <math.h>
