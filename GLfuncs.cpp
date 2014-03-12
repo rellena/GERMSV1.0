@@ -8,16 +8,19 @@ extern Point mouse;
 extern unit *enemy;
 extern bool *en_move;
 extern int enemy_size;
+extern bool ingame;
 
 void resize(int width, int height)
 {
+	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();//unsure what this does?
 	gluOrtho2D(0.0, width, 0, height);//changes the view to the screen ~ IMPORTANT
+	
 	glScalef(1, -1, 1);//inverts the y axis
-	glTranslatef(0, -height, 0);//changes the xy scale, in opengl, 0,0 is bottom left, this makes it upper left
+	glTranslatef(0, -screenheight, 0);//changes the xy scale, in opengl, 0,0 is bottom left, this makes it upper left
 	glViewport(0, 0, width, height);
 	glMatrixMode(GL_MODELVIEW);
-	
+
 	screenwidth = width;
 	screenheight = height;
 }
@@ -38,18 +41,30 @@ void getResolution()
 
 void display(void)
 {
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+
+	if (!ingame )
+	{
+		drawMenu();
+	}
+	else 
+	{
 	//movements handling
 	playerMovement();//player collisons handled inside this function
 	enemyMovement();
 
 	//player drawing
 	glPushAttrib(GL_CURRENT_BIT);//keeps players color from changing
+	glColor4f(0.0, 1.0, 0.0,1.0); 
 	drawPlayer();
-	glColor3f(0.0, 1.0, 0.0); 
+	
 
 	//enemy drawing
 	for (int x=0; x<enemy_size; x++)
 		drawEnemy(enemy[x].getPosition().x, enemy[x].getPosition().y,enemy[x].getRadius());
+	}	
+
 
 	glutSwapBuffers();//swap bufferes!!!! Important for animation
 	glFlush();

@@ -7,7 +7,9 @@
 //Private Mouse Listener Functions
 //GLOBAL VARIABLES
 bool wasclicked_LB = false, wasclicked_RB = false, wasclicked_MB = false, ingame = false, _move = false;
-Point mouse;
+Point mouse, mouseP;
+extern int screenheight;
+
 
 void mouseButton(int button, int state, int x, int y)
 {
@@ -41,6 +43,8 @@ void mouseButton(int button, int state, int x, int y)
 				wasclicked_LB = true;
 				_move = true;
 			}
+			else
+				wasclicked_LB = true;
 			break;
 		case GLUT_RIGHT_BUTTON:
 			break;
@@ -63,6 +67,8 @@ void mouseActive(int x, int y)
 }
 void mousePassive(int x, int y)
 {
+	mouseP.x = x;
+	mouseP.y = y;
 }
 
 

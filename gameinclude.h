@@ -21,5 +21,8 @@
 #include "playermovefuncs.h"
 #include "enemyhandler.h"
 #include "collisions.h"
+#include "lib/SOIL.h"
+#include "text.h"
+#include "menu.h"
 
 using namespace std;
