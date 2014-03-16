@@ -1,7 +1,7 @@
 #include "gameinclude.h"
 extern player mainPlayer;
 extern bool _move;
-
+extern bool ingame, inGameMenu;
 void keypressed(int key, int x, int y)
 {
     switch (key){
@@ -21,7 +21,7 @@ void keypressed(int key, int x, int y)
             _move = true;
 			mainPlayer.move((mainPlayer.getPosition().x), mainPlayer.getPosition().y-mainPlayer.getSpeed());
 			_move = false;
-            break;
+		break;
 
         case GLUT_KEY_DOWN:
             _move = true;
@@ -33,4 +33,22 @@ void keypressed(int key, int x, int y)
          break;
     }
     glutPostRedisplay();
+}
+
+void normalKeyPressed(unsigned char key, int x, int y)
+{
+	switch(key)
+	{
+		case 27:
+			if(ingame)
+			{
+				ingame = false;
+				inGameMenu = true;
+			}
+			else if (inGameMenu)
+			{
+				inGameMenu = false;
+				ingame = true;
+			}
+	}
 }

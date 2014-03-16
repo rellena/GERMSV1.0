@@ -9,16 +9,19 @@ extern unit *enemy;
 extern bool *en_move;
 extern int enemy_size;
 extern bool ingame;
+extern menu Menu;
 
 void resize(int width, int height)
 {
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();//unsure what this does?
+
 	gluOrtho2D(0.0, width, 0, height);//changes the view to the screen ~ IMPORTANT
 	
 	glScalef(1, -1, 1);//inverts the y axis
 	glTranslatef(0, -screenheight, 0);//changes the xy scale, in opengl, 0,0 is bottom left, this makes it upper left
 	glViewport(0, 0, width, height);
+	
 	glMatrixMode(GL_MODELVIEW);
 
 	screenwidth = width;
@@ -39,14 +42,13 @@ void getResolution()
    screenheight = desktop.bottom;
 }
 
+
 void display(void)
 {
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-
+	
 	if (!ingame )
 	{
-		drawMenu();
+		Menu.drawMenu();
 	}
 	else 
 	{
@@ -58,14 +60,13 @@ void display(void)
 	glPushAttrib(GL_CURRENT_BIT);//keeps players color from changing
 	glColor4f(0.0, 1.0, 0.0,1.0); 
 	drawPlayer();
-	
 
 	//enemy drawing
 	for (int x=0; x<enemy_size; x++)
 		drawEnemy(enemy[x].getPosition().x, enemy[x].getPosition().y,enemy[x].getRadius());
 	}	
 
-
+	
 	glutSwapBuffers();//swap bufferes!!!! Important for animation
-	glFlush();
+//	glFlush();
 }

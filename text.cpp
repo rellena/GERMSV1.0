@@ -14,13 +14,15 @@
 text::text(const unsigned char* t)
 	:strText(t),
 	txtPosX(0), txtPosY(0),
-	txtScaleX(1), txtScaleY(1)
+	txtScaleX(1), txtScaleY(1), 
+	boxR(1), boxB(1), boxG(1), boxA(0.3)
 {}
 
 text::text(const unsigned char* t, GLfloat x, GLfloat y, GLfloat sx, GLfloat sy)
 	:strText(t),
 	txtPosX(x), txtPosY(y),
-	txtScaleX(sx), txtScaleY(sy)
+	txtScaleX(sx), txtScaleY(sy),
+	boxR(1), boxB(1), boxG(1), boxA(0.3)
 {}
 
 void text::setText(const unsigned char* t)
@@ -85,7 +87,7 @@ void text::drawText()
 {
 	glPushMatrix();
 		glTranslatef(getTxtPosX(), getTxtPosY(), 0.0);
-		glScalef(getTxtScaleX(), getTxtScaleY(), 1.0);
+		glScalef(getTxtScaleX(), -getTxtScaleY(), 1.0);
 		glutStrokeString(GLUT_STROKE_ROMAN, text::getText());
 	glPopMatrix();
 }
@@ -99,7 +101,6 @@ void text::drawText(GLfloat x, GLfloat y, GLfloat sx, GLfloat sy)
 
 void text::drawTextBox(GLfloat x, GLfloat y, GLfloat w, GLfloat h)
 {
-	glPushMatrix();
 	glColor4f(boxR, boxG, boxB, boxA);
 	glBegin( GL_QUADS );
 		glVertex2f(x, y);
@@ -107,6 +108,5 @@ void text::drawTextBox(GLfloat x, GLfloat y, GLfloat w, GLfloat h)
 		glVertex2f(x+w, y+h);
 		glVertex2f(x, y+h);
 	glEnd();
-	glPopMatrix();
 }
 
